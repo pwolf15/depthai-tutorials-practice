@@ -4,3 +4,8 @@ https://docs.luxonis.com/projects/api/en/latest/samples/01_rgb_preview/ (Code Sa
 * dense desparity map
 * semi-global matching
 * median filtering
+
+https://opencv.org/courses/
+
+* filter: a device or material for suppressing or minimizing waves or oscillations of certain frequencies
+* 
