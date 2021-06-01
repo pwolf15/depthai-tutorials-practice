@@ -9,7 +9,7 @@ import argparse
 
 nnPathDefault = str((Path(__file__).parent / Path('models/mobilenet-ssd_openvino_2021.2_6shave.blob')).resolve().absolute())
 parser = argparse.ArgumentParser()
-parser.add_argument('nnPath', nargs='?', help='Path to mobilent detection network blob', default=nnPathDefault)
+parser.add_argument('nnPath', nargs='?', help="Path to mobilenet detection network blob", default=nnPathDefault)
 parser.add_argument('-s', '--sync', action="store_true", help="Sync RGB output with NN output", default=False)
 args = parser.parse_args()
 
@@ -19,7 +19,7 @@ if not Path(nnPathDefault).exists():
 
 # MobilenetSSD label texts
 labelMap = ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow",
-    "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
+            "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"]
 
 # Create pipeline
 pipeline = dai.Pipeline()
@@ -35,11 +35,10 @@ xoutRgb.setStreamName("rgb")
 nnOut.setStreamName("nn")
 
 # Properties
-camRgb.setPreviewSize(300,300)
+camRgb.setPreviewSize(300, 300)
 camRgb.setInterleaved(False)
 camRgb.setFps(40)
-
-# Define a neural netwok that will make predictions based on the source frames
+# Define a neural network that will make predictions based on the source frames
 nn.setConfidenceThreshold(0.5)
 nn.setBlobPath(args.nnPath)
 nn.setNumInferenceThreads(2)
@@ -68,7 +67,7 @@ with dai.Device(pipeline) as device:
     color2 = (255, 255, 255)
 
     # nn data (bounding box locations) are in <0..1> range - they need to be normalized with frame width/height
-    def frameNorm(frame,bbox):
+    def frameNorm(frame, bbox):
         normVals = np.full(len(bbox), frame.shape[0])
         normVals[::2] = frame.shape[1]
         return (np.clip(np.array(bbox), 0, 1) * normVals).astype(int)
@@ -102,9 +101,9 @@ with dai.Device(pipeline) as device:
             detections = inDet.detections
             counter += 1
 
-        # if the frame is available, draw bounding boxes on it and show the frame
+        # If the frame is available, draw bounding boxes on it and show the frame
         if frame is not None:
             displayFrame("rgb", frame)
-        
+
         if cv2.waitKey(1) == ord('q'):
             break
