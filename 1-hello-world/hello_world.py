@@ -20,7 +20,7 @@ cam_rgb.setInterleaved(False)
 #   blob 1x3x300x300 model input
 
 detection_nn = pipeline.createNeuralNetwork()
-detection_nn.setBlobPath("/home/pwolf/dev/ml/depthai/depthai-tutorials-practice/1-hello-world/mobilenet-ssd.blob")
+detection_nn.setBlobPath("/home/pwolf/dev/ml/depthai-tutorials-practice/1-hello-world/mobilenet-ssd.blob")
 
 # connect color camera output to nn input
 cam_rgb.preview.link(detection_nn.input)
