@@ -1,0 +1,3 @@
+[submodule "cpp_examples/depthai-core"]
+	path = cpp_examples/depthai-core
+	url = https://github.com/luxonis/depthai-core.git
